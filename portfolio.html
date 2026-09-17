@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habib — Web Developer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEFF0;
+    --panel:#FBFCFC;
+    --ink:#171B1F;
+    --ink-soft:#565F66;
+    --line:rgba(23,27,31,0.12);
+    --accent:#1F6F63;
+    --accent-soft:#E4EFEC;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family:'Source Serif 4',serif;
+    font-weight:600;
+    margin:0;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+
+  header.hero{
+    padding:64px 0 40px;
+    border-bottom:1px solid var(--line);
+  }
+  header.hero h1{font-size:2.4rem;letter-spacing:-0.01em;}
+  header.hero p.role{
+    margin-top:8px;
+    color:var(--ink-soft);
+    font-size:1.05rem;
+  }
+  header.hero p.pitch{
+    margin-top:20px;
+    max-width:60ch;
+    font-size:1rem;
+  }
+  .links{margin-top:24px;display:flex;gap:16px;flex-wrap:wrap;}
+  .links a{
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--accent);
+    padding-bottom:2px;
+    font-size:0.95rem;
+  }
+  .links a:hover{color:var(--accent);}
+
+  .stack-note{
+    margin-top:28px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .stack-note span{
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:4px 10px;
+    background:var(--panel);
+  }
+
+  main{padding:40px 0 80px;}
+
+  .case-files{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:32px;
+  }
+  nav.index{
+    border-right:1px solid var(--line);
+    padding-right:24px;
+  }
+  nav.index button{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    padding:14px 0;
+    font-family:'Inter',sans-serif;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    cursor:pointer;
+    border-bottom:1px solid var(--line);
+  }
+  nav.index button .num{
+    display:inline-block;
+    width:20px;
+    color:var(--ink-soft);
+    font-variant-numeric:tabular-nums;
+  }
+  nav.index button.active{color:var(--ink);font-weight:600;}
+  nav.index button.active .num{color:var(--accent);}
+
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .panel h2{font-size:1.6rem;}
+  .panel p.summary{margin-top:10px;color:var(--ink-soft);max-width:56ch;}
+
+  .tags{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;}
+  .tags span{
+    font-size:0.78rem;
+    background:var(--accent-soft);
+    color:var(--accent);
+    padding:3px 10px;
+    border-radius:3px;
+  }
+
+  .features{margin-top:20px;padding-left:18px;color:var(--ink);}
+  .features li{margin-bottom:6px;}
+
+  .gallery{
+    margin-top:24px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+  .gallery .shot{
+    aspect-ratio:16/10;
+    background:var(--panel);
+    border:1px dashed var(--line);
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--ink-soft);
+    font-size:0.8rem;
+    text-align:center;
+    padding:8px;
+    overflow:hidden;
+  }
+  .gallery .shot img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  .shots{
+    margin-top:24px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+  .shots figure{margin:0;}
+  .shots img{
+    width:100%;
+    display:block;
+    border:1px solid var(--line);
+    border-radius:4px;
+    background:var(--panel);
+  }
+  .shots figcaption{
+    margin-top:6px;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+  }
+
+  .video{
+    margin-top:24px;
+  }
+  .video .frame{
+    aspect-ratio:16/9;
+    background:var(--panel);
+    border:1px dashed var(--line);
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--ink-soft);
+    font-size:0.85rem;
+  }
+  .video iframe{width:100%;height:100%;border:0;border-radius:4px;}
+
+  .repo-note{
+    margin-top:20px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+  .repo-note a{color:var(--accent);}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0 60px;
+    color:var(--ink-soft);
+    font-size:0.9rem;
+  }
+  footer a{color:var(--accent);}
+
+  @media (max-width:640px){
+    .case-files{grid-template-columns:1fr;}
+    nav.index{
+      border-right:none;
+      border-bottom:1px solid var(--line);
+      padding-right:0;
+      padding-bottom:8px;
+      display:flex;
+      gap:4px;
+      overflow-x:auto;
+    }
+    nav.index button{border-bottom:none;padding:10px 12px;white-space:nowrap;}
+    .gallery{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <!-- Replace name and tagline -->
+    <h1>Habib</h1>
+    <p class="role">PHP &amp; MySQL Web Developer</p>
+    <p class="pitch">
+      I build practical business tools — booking systems, online stores, and ordering platforms —
+      from the ground up. The three projects below were built end-to-end and run fully locally;
+      screenshots and walkthrough videos are included for each since they aren't hosted live yet.
+    </p>
+    <div class="links">
+      <!-- Replace with your real links -->
+      <a href="#" target="_blank">Upwork profile</a>
+      <a href="#" target="_blank">Fiverr profile</a>
+      <a href="mailto:you@example.com">Email me</a>
+    </div>
+    <div class="stack-note">
+      <span>PHP</span>
+      <span>MySQL</span>
+      <span>HTML / CSS / JS</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="case-files">
+      <nav class="index">
+        <button class="active" data-target="probook"><span class="num">01</span> ProBook</button>
+        <button data-target="shopkart"><span class="num">02</span> ShopKart</button>
+        <button data-target="tastehub"><span class="num">03</span> TasteHub</button>
+      </nav>
+
+      <div class="panels">
+
+        <section class="panel active" id="probook">
+          <h2>ProBook — Salon Appointment Booking System</h2>
+          <p class="summary">
+            A booking platform for salons: customers pick a service and time slot online,
+            and the salon manages its schedule from an admin panel instead of a phone diary.
+          </p>
+          <div class="tags"><span>PHP</span><span>MySQL</span><span>Admin dashboard</span></div>
+          <ul class="features">
+            <li>Customer-facing booking form with live availability</li>
+            <li>Admin panel to manage services, staff, and time slots</li>
+            <li>Appointment status tracking (booked / completed / cancelled)</li>
+          </ul>
+
+          <div class="shots">
+            <figure>
+              <img src="screenshots/probook/home.png" alt="ProBook home page">
+              <figcaption>Home page</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/probook/services.png" alt="ProBook services page">
+              <figcaption>Services</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/probook/booking-filled.png" alt="ProBook booking form filled in">
+              <figcaption>Booking a slot</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/probook/confirmation.png" alt="ProBook booking confirmation">
+              <figcaption>Booking confirmed</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/probook/admin-dashboard.png" alt="ProBook admin dashboard">
+              <figcaption>Admin dashboard</figcaption>
+            </figure>
+          </div>
+
+          <div class="video">
+            <!-- Replace with: <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+            <div class="frame">walkthrough video goes here</div>
+          </div>
+
+          <p class="repo-note">Code: <a href="#" target="_blank">github.com/yourname/probook</a></p>
+        </section>
+
+        <section class="panel" id="shopkart">
+          <h2>ShopKart — E-commerce Store</h2>
+          <p class="summary">
+            An online store with a product catalog, shopping cart, and checkout flow —
+            built to give a small seller a real storefront without relying on a marketplace.
+          </p>
+          <div class="tags"><span>PHP</span><span>MySQL</span><span>Cart &amp; checkout</span></div>
+          <ul class="features">
+            <li>Product listing with categories and search</li>
+            <li>Cart with quantity updates and totals</li>
+            <li>Order placement and order history</li>
+          </ul>
+
+          <div class="shots">
+            <figure>
+              <img src="screenshots/shopkart/home.png" alt="ShopKart home page">
+              <figcaption>Home page</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/shopkart/shop-products.png" alt="ShopKart product catalog">
+              <figcaption>Product catalog</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/shopkart/cart-filled.png" alt="ShopKart cart with items">
+              <figcaption>Cart</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/shopkart/order-confirmation.png" alt="ShopKart order confirmation">
+              <figcaption>Order confirmed</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/shopkart/admin-dashboard.png" alt="ShopKart admin dashboard">
+              <figcaption>Admin dashboard</figcaption>
+            </figure>
+          </div>
+
+          <div class="video">
+            <div class="frame">walkthrough video goes here</div>
+          </div>
+
+          <p class="repo-note">Code: <a href="#" target="_blank">github.com/yourname/shopkart</a></p>
+        </section>
+
+        <section class="panel" id="tastehub">
+          <h2>TasteHub — Restaurant Food Ordering Site</h2>
+          <p class="summary">
+            A food ordering site for restaurants: customers browse the menu and place an order,
+            and the restaurant sees incoming orders on the backend.
+          </p>
+          <div class="tags"><span>PHP</span><span>MySQL</span><span>Order management</span></div>
+          <ul class="features">
+            <li>Menu browsing with item details and pricing</li>
+            <li>Order placement with delivery/pickup details</li>
+            <li>Backend view of incoming orders for the restaurant</li>
+          </ul>
+
+          <div class="shots">
+            <figure>
+              <img src="screenshots/tastehub/home.webp" alt="TasteHub home page">
+              <figcaption>Home page</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/tastehub/menu.png" alt="TasteHub menu with filters and categories">
+              <figcaption>Menu</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/tastehub/checkout-filled.webp" alt="TasteHub checkout page filled in with delivery details">
+              <figcaption>Checkout</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/tastehub/order-success.png" alt="TasteHub order confirmation page">
+              <figcaption>Order confirmed</figcaption>
+            </figure>
+            <figure>
+              <img src="screenshots/tastehub/admin-orders.png" alt="TasteHub admin panel showing incoming orders">
+              <figcaption>Admin panel — orders</figcaption>
+            </figure>
+          </div>
+
+          <div class="video">
+            <div class="frame">walkthrough video goes here</div>
+          </div>
+
+          <p class="repo-note">Code: <a href="#" target="_blank">github.com/yourname/tastehub</a></p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Available for freelance PHP/MySQL projects — <a href="mailto:you@example.com">get in touch</a>.
+  </footer>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('nav.index button');
+  const panels = document.querySelectorAll('.panel');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
